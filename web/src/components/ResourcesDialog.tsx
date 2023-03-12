@@ -21,7 +21,7 @@ import dayjs from "dayjs";
 type Props = DialogProps;
 
 interface FileProps {
-  resouce: Resource;
+  resource: Resource;
   select: any;
   unselect: any;
 }
@@ -43,12 +43,11 @@ function getFileCover(filename: string): ReactElement {
   }
 }
 
-const File = ({ resouce, select, unselect }: FileProps) => {
+const File = ({ resource, select, unselect }: FileProps) => {
   const locale = "en";
 
   const [beSelect, setBeSelect] = useState(false);
-  const cover = getFileCover(resouce.filename);
-  const { t, _ } = useTranslation();
+  const cover = getFileCover(resource.filename);
 
   return (
     <div
@@ -78,8 +77,8 @@ const File = ({ resouce, select, unselect }: FileProps) => {
       </div>
       {cover}
       <div>
-        <div className="resource-title">{resouce.filename}</div>
-        <div className="resource-time">{dayjs(resouce.createdTs).locale(locale).format("YYYY/MM/DD HH:mm:ss")}</div>
+        <div className="resource-title">{resource.filename}</div>
+        <div className="resource-time">{dayjs(resource.createdTs).locale(locale).format("YYYY/MM/DD HH:mm:ss")}</div>
       </div>
     </div>
   );
@@ -241,7 +240,7 @@ const ResourcesDialog: React.FC<Props> = (props: Props) => {
               resources.map((resource) => (
                 <File
                   key={resource.id}
-                  resouce={resource}
+                  resource={resource}
                   select={() => handleSelectBtnClick(resource)}
                   unselect={() => handleUNSelectBtnClick(resource)}
                 ></File>
